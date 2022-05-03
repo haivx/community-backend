@@ -1,0 +1,37 @@
+version: '3'
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: nobodyknow
+      POSTGRES_DB: community
+    volumes:
+      - db_vol:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    restart: 'no'
+  nginx:
+    depends_on:
+      - api
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - '8080:80'
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    depends_on:
+      - postgres
+    volumes:
+      - /app/node_modules
+      - ./:/app
+    environment:
+      DB_HOST: host.docker.internal
+      DATABASE_URL: postgres://postgres:nobodyknow@127.0.0.1:5432/community
+volumes:
+    db_vol:
+        external: false

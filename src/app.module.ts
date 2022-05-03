@@ -18,13 +18,13 @@ import { configValidationSchema } from './config.schema';
       useFactory: async (configService: ConfigService) => {
         return {
           type: 'postgres',
-          host: configService.get('DB_HOST'),
-          port: configService.get('DB_PORT'),
-          username: 'postgres',
-          password: 'postgres',
-          database: 'task-management',
           autoLoadEntities: true,
           synchronize: true,
+          host: configService.get('DB_HOST'),
+          port: configService.get('DB_PORT'),
+          username: configService.get('DB_USERNAME'),
+          password: configService.get('DB_PASSWORD'),
+          database: configService.get('DB_DATABASE'),
         };
       },
     }),
