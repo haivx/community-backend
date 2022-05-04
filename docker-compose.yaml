@@ -7,28 +7,30 @@ services:
       POSTGRES_PASSWORD: nobodyknow
       POSTGRES_DB: community
     volumes:
-      - db_vol:/var/lib/postgresql/data
+      - ./data/db:/var/lib/postgresql/data
     ports:
       - 5432:5432
     restart: 'no'
   nginx:
-    depends_on:
-      - api
-    restart: always
     build:
       dockerfile: Dockerfile
       context: ./nginx
     ports:
       - '8080:80'
+    networks:
+        - common
+    restart: always
   api:
     build:
       dockerfile: Dockerfile
       context: .
-    depends_on:
-      - postgres
     volumes:
       - /app/node_modules
       - ./:/app
     environment:
       DB_HOST: host.docker.internal
       DATABASE_URL: postgres://postgres:nobodyknow@host.docker.internal:5432/community
+    networks:
+        - common
+networks:
+    common:
