@@ -31,7 +31,4 @@ services:
       - ./:/app
     environment:
       DB_HOST: host.docker.internal
-      DATABASE_URL: postgres://postgres:nobodyknow@127.0.0.1:5432/community
-volumes:
-    db_vol:
-        external: false
+      DATABASE_URL: postgres://postgres:nobodyknow@host.docker.internal:5432/community
