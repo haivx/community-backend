@@ -1,3 +1,13 @@
+# This repo is part of fullstack Blog application
+
+This project was bootstrapped with NestJS, built with NodeJS, Postgresql and some other libraries as Backend repo.
+
+The frontend repo was built by ReactJS, Antd,... You can find in [here](https://github.com/haivx/community-frontend)
+
+## Contribute
+
+This repo is still developed and welcome any contributor who want to learn ReacJS, Antd, NodeJS, NestJS, Docker, Posgresql.
+
 
 I. How to start:
 

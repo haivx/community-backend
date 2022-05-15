@@ -4,9 +4,11 @@ import {
   Logger,
 } from '@nestjs/common';
 import { EntityRepository, Repository } from 'typeorm';
-import bcrypt from 'bcrypt';
 import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { User } from './user.entity';
+
+
+const bcrypt = require('bcrypt');
 
 @EntityRepository(User)
 export class UsersRepository extends Repository<User> {
